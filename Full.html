@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Whole Tenet</title>
+    <style>
+        body, html {
+            height: 100%; /* Full height */
+            margin: 0; /* Remove default margin */
+            display: flex;
+            justify-content: center;
+            align-items: center; /* Center the table on the page */
+            background-color: black; /* Set background color */
+            overflow: hidden; /* Hide overflow */
+        }
+        #patternTable {
+            width: 100vw; /* Use 100% of the viewport width */
+            height: 100vh; /* Use 100% of the viewport height */
+            display: grid;
+            grid-template-columns: repeat(100, 1fr); /* 100 columns */
+            grid-template-rows: repeat(100, 1fr); /* 100 rows */
+        }
+        .cell {
+            width: 1%; /* Width for each cell */
+            height: 1%; /* Height for each cell */
+        }
+        .filled {
+            background-color: black;
+        }
+        .empty {
+            background-color: white;
+        }
+    </style>
+</head>
+<body>
+    <div id="patternTable">
+        <!-- Cells will be dynamically generated here -->
+    </div>
+    <script>
+        const numRows = 100; // 100 rows
+        const numCols = 100; // 100 columns
+
+        function generatePatternMatrix() {
+            return Math.random() < 0.5 ? 'filled' : 'empty';
+        }
+
+        function updatePatternGrid() {
+            const patternTable = document.getElementById('patternTable');
+            patternTable.innerHTML = ''; // Clear existing patterns
+
+            for (let i = 0; i < numRows; i++) {
+                for (let j = 0; j < numCols; j++) {
+                    const cell = document.createElement('div');
+                    cell.className = `cell ${generatePatternMatrix()}`; // Apply a random pattern to each cell
+                    patternTable.appendChild(cell);
+                }
+            }
+        }
+
+        function refreshPatterns() {
+            updatePatternGrid(); // Update the grid with new patterns
+        }
+
+        updatePatternGrid(); // Initial setup of the grid
+        setInterval(refreshPatterns, 100); // Refresh patterns every 100 milliseconds
+    </script>
+</body>
+</html>
