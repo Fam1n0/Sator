@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alchemical Sator-Vision Square</title>
+    <style>
+        body, html {
+            height: 100%; /* Full height */
+            margin: 0; /* Remove default margin */
+            display: flex;
+            justify-content: center;
+            align-items: center; /* Center the table on the page */
+        }
+        table {
+            border-collapse: collapse;
+            border: 5px solid black; /* Frame around the grid */
+            width: 300px; /* Fixed width */
+            height: 300px; /* Fixed height to ensure it's square */
+            table-layout: fixed; /* Ensures the table respects the defined width and height */
+        }
+        td {
+            border: none;
+            width: 3px; /* Width for each cell */
+            height: 3px; /* Height for each cell, ensures each cell is square */
+            padding: 0; /* Remove padding */
+        }
+        .filled {
+            background-color: black;
+        }
+        .empty {
+            background-color: white;
+        }
+    </style>
+</head>
+<body bgcolor='black'>
+    <table id="patternTable">
+        <tbody>
+            <!-- Dynamically generated pattern will go here -->
+        </tbody>
+    </table>
+    <script>
+        const numRows = 100; // 100 rows
+        const numCols = 100; // 100 columns
+        const patternOrder = [1,2,3,4,5,2,5,6,7,4,3,6,8,6,3,4,7,6,5,2,5,4,3,2,1];
+
+        function generatePatternMatrix() {
+            return Math.random() < 0.5 ? 'filled' : 'empty';
+        }
+
+        function updatePatternGrid() {
+            const tableBody = document.getElementById('patternTable');
+            tableBody.innerHTML = ''; // Clear existing patterns
+
+            for (let i = 0; i < numRows; i++) {
+                const row = tableBody.insertRow();
+                for (let j = 0; j < numCols; j++) {
+                    const cell = row.insertCell();
+                    cell.className = generatePatternMatrix(); // Apply a random pattern to each cell
+                }
+            }
+        }
+
+        function refreshPatterns() {
+            updatePatternGrid(); // Update the grid with new patterns
+        }
+
+        updatePatternGrid(); // Initial setup of the grid
+        setInterval(refreshPatterns, 100); // Refresh patterns every 100 milliseconds
+    </script>
+</body>
+</html>
